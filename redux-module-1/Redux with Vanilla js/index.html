@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Tailwind cdn link -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body>
-    
+
+<body class="flex justify-center items-center h-screen">
+    <div
+        class=" border-2 border-black button-holder bg-slate-200 w-8/12 h-3/6 rounded flex justify-center items-center">
+        <button class="bg-red-600 text-white px-3 py-2 rounded font-medium text-xl">Increment</button>
+        <button class="bg-green-600 text-white font-medium py-2 px-3 text-xl rounded ml-6">Decrement</button>
+    </div>
 </body>
+
 </html>
