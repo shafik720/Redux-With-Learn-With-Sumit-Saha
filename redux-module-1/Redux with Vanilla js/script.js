@@ -10,23 +10,6 @@ const initialState = {
     value : 0 ,
 };
 
-//action identifiers
-const INCREMENT =   'increment';
-const DECREMENT =   'decrement';
-
-// action creators
-const increment = (value) =>{
-    return {
-        type : INCREMENT,
-        payload : value,
-    }
-}
-const decrement = (value) =>{
-    return {
-        type : DECREMENT,
-        payload : value,
-    }
-}
 
 // reducer function
 function counterReducer(state=initialState, action){
@@ -55,6 +38,25 @@ const render = () => {
 store.subscribe(render);
 
 render();
+
+//action identifiers
+const INCREMENT =   'increment';
+const DECREMENT =   'decrement';
+
+// action creators
+const increment = (value) =>{
+    return {
+        type : INCREMENT,
+        payload : value,
+    }
+}
+const decrement = (value) =>{
+    return {
+        type : DECREMENT,
+        payload : value,
+    }
+}
+
 
 // button clicking event
 incrementElement.addEventListener('click', ()=>{
