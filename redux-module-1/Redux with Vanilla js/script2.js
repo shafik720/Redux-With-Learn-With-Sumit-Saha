@@ -1,46 +1,73 @@
 
 
-// selecting dom element
-const counterElement = document.getElementById('counter');
-const incrementElement = document.getElementById('increment');
-const decrementElement = document.getElementById('decrement');
 
-
-// first state or initial state
 const initialState = {
-    value : 0,
+    value: 0
 }
 
-
-// creating a reducer
-const countReducer = (state = initialState, action) =>{
-    if(action.type === 'increment'){
-        return updateState = {
+// creating reducer
+const counterReducer = (state = initialState, action) => {
+    if (action.type === 'increment') {
+        return {
             ...state,
-            value : state.value + 1
+            value: state.value + action.payload,
         }
-    }else if(action.type === 'decrement'){
-        return updateState = {
-            ...state, 
-            value : state.value - 1 
+    } else if (action.type === 'decrement') {
+        return {
+            ...state,
+            value: state.value - action.payload
         }
-    }else{
+    } else {
         return state;
     }
 }
+// selecting dom element
+const counterElement = document.getElementById('counter');
+const incrementElement = document.getElementById('increment');
+const decreaseElement = document.getElementById('decrement');
 
 // creating store
-const store = Redux.createStore(countReducer);
+const store = Redux.createStore(counterReducer);
 
-const render = () =>{
+// subscribing
+const render = () => {
     const state = store.getState();
-    counterElement.innerText = state.value;
+    counterElement.innerText = state.value.toString();
+}
+store.subscribe(render);
+
+render();
+
+// action identifiers
+const INCREMENT = 'increment';
+const DECREMENT = 'decrement';
+
+// action creators
+const increaseValue = (value) => {
+    return {
+        type: INCREMENT,
+        payload: value
+    }
 }
 
-store.subscribe(render);
-// 
-incrementElement.addEventListener('click',()=>{
-    store.dispatch( {
-        type : 'increment'
-    } )
+const decreaseValue = (value) => {
+    return {
+        type : DECREMENT,
+        payload : value
+    }
+}
+
+// adding event listener
+incrementElement.addEventListener('click', () => {
+    store.dispatch(increaseValue(5))
+})
+
+decreaseElement.addEventListener('click',()=>{
+    const state = store.getState().value;
+    if(state > 0){
+        store.dispatch(decreaseValue(5))
+    }else {
+        return;
+    }
+    
 })
