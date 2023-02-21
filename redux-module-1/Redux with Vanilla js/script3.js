@@ -59,9 +59,13 @@ const decreasingValue = (value) =>{
 
 // creating event listener
 increaseElement.addEventListener('click',()=>{
-    store.dispatch(increasingValue(15))
+    store.dispatch(increasingValue(5))
 })
 
 decreaseElement.addEventListener('click',()=>{
+    //  if the value is 0 
+    if(store.getState().value <= 0){
+        return;
+    }
     store.dispatch(decreasingValue(5))
 })
