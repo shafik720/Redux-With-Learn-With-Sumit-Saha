@@ -10,7 +10,7 @@ const initialState = {
     value : 0 ,
 };
 
-//action creator
+//action identifiers
 const INCREMENT =   'increment';
 const DECREMENT =   'decrement';
 
