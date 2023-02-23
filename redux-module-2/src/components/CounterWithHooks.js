@@ -8,10 +8,10 @@ function CounterWithHooks({}) {
     const dispatch = useDispatch();
 
     const incrementHandler = (value) =>{
-        dispatch(increment(value));
+        dispatch(increment);
     }
-    const decrementHandler = (value) => {
-        dispatch(decrement(value));
+    const decrementHandler = () =>{
+        dispatch(decrement);
     }
     return (
         <div className="p-4 h-auto flex flex-col items-center justify-center space-y-5 bg-white rounded shadow">
@@ -19,13 +19,13 @@ function CounterWithHooks({}) {
             <div className="flex space-x-3">
                 <button
                     className="bg-indigo-400 text-white px-3 py-2 rounded shadow"
-                    onClick={()=>incrementHandler(5)}
+                    onClick={incrementHandler}
                 >
                     Increment
                 </button>
                 <button
                     className="bg-red-400 text-white px-3 py-2 rounded shadow"
-                    onClick={()=>decrementHandler(2)}
+                    onClick={decrementHandler}
                 >
                     Decrement
                 </button>
