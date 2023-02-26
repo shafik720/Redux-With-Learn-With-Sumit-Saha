@@ -9,10 +9,10 @@ const incrementValue = (value,id) =>{
     }
 }
 
-const decrementValue = (value) => {
+const decrementValue = (value, id) => {
     return {
         type : DECREMENT,
-        payload : value
+        payload : {value,id}
     }
 }
 

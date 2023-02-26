@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteMatch, incrementValue } from '../../../Redux/actionCreators';
+import { decrementValue, deleteMatch, incrementValue } from '../../../Redux/actionCreators';
 import deleteImg from '../../../utilities/image/delete.svg';
 
 
@@ -13,11 +13,17 @@ const SingleMatch = (props) => {
         dispatch(deleteMatch(id));
     }
 
-    const incrementHandler = (event) =>{
+    const incrementHandler = (event, isIncrement) =>{
         event.preventDefault();
-        // console.log(event.target.increment.value);
-        const value = event.target.increment.value;
-        dispatch(incrementValue(value, id));
+        
+        const value = event.target.querySelector("input").value;
+
+        if(isIncrement){
+            dispatch(incrementValue(value, id));
+        }else{
+            dispatch(decrementValue(value,id));
+        }
+        
     }
     return (
         <div className="">
@@ -29,11 +35,11 @@ const SingleMatch = (props) => {
                     <h3 className="lws-matchName">Match {id}</h3>
                 </div>
                 <div className="inc-dec">
-                    <form className="incrementForm" onSubmit={incrementHandler}>
+                    <form className="incrementForm" onSubmit={(event)=>incrementHandler(event, true)}>
                         <h4>Increment</h4>
                         <input type="number" name="increment" className="lws-increment" />
                     </form>
-                    <form className="decrementForm">
+                    <form className="decrementForm"  onSubmit={(event)=>incrementHandler(event, false)}>
                         <h4>Decrement</h4>
                         <input type="number" name="decrement" className="lws-decrement" />
                     </form>
