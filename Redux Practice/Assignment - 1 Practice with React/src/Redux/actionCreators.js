@@ -1,10 +1,11 @@
-import { ADD_MATCH, DECREMENT, DELETE_MATCH, INCREMENT, RESET_MATCH } from "./actionIdentifiers";
+import { ADD_MATCH, DECREMENT, DELETE_MATCH, INCREMENT, RESET_MATCH } 
+from "./actionIdentifiers";
 
 
-const incrementValue = (value) =>{
+const incrementValue = (value,id) =>{
     return{
         type : INCREMENT,
-        payload : value
+        payload : {value,id}
     }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteMatch } from '../../../Redux/actionCreators';
+import { deleteMatch, incrementValue } from '../../../Redux/actionCreators';
 import deleteImg from '../../../utilities/image/delete.svg';
 
 
@@ -13,6 +13,12 @@ const SingleMatch = (props) => {
         dispatch(deleteMatch(id));
     }
 
+    const incrementHandler = (event) =>{
+        event.preventDefault();
+        // console.log(event.target.increment.value);
+        const value = event.target.increment.value;
+        dispatch(incrementValue(value, id));
+    }
     return (
         <div className="">
             <div className="match">
@@ -23,7 +29,7 @@ const SingleMatch = (props) => {
                     <h3 className="lws-matchName">Match {id}</h3>
                 </div>
                 <div className="inc-dec">
-                    <form className="incrementForm">
+                    <form className="incrementForm" onSubmit={incrementHandler}>
                         <h4>Increment</h4>
                         <input type="number" name="increment" className="lws-increment" />
                     </form>

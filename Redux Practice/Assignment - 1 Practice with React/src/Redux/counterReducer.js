@@ -7,7 +7,7 @@ const initialState = {
             id : 1,
             incrementValue : 0,
             decrementValue : 0, 
-            score : 235
+            score : 0
         }
     ]
 }
@@ -24,7 +24,7 @@ export const counterReducer = (state = initialState, action) => {
                         id : newId,
                         incrementValue : 0,
                         decrementValue : 0, 
-                        score : 255
+                        score : 0
                     }
                 ]
             }
@@ -41,6 +41,15 @@ export const counterReducer = (state = initialState, action) => {
             ...state,
             matches : state.matches.map(match => ({...match, score : 0 }))
         }
+
+    case INCREMENT : 
+    console.log(action.payload.id)
+    return{
+        ...state,
+        matches : state.matches.map(match => 
+           match.id == action.payload.id ? {...match, score : match.score + parseInt(action.payload.value)} : match
+            )
+    }
 
         default:
             return state;
