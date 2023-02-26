@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteMatch } from '../../../Redux/actionCreators';
 import deleteImg from '../../../utilities/image/delete.svg';
 
 
@@ -6,12 +8,16 @@ import deleteImg from '../../../utilities/image/delete.svg';
 const SingleMatch = (props) => {
     const { id, score } = props.match;
 
+    const dispatch = useDispatch();
+    const removeMatch = (id) => {
+        dispatch(deleteMatch(id));
+    }
 
     return (
         <div className="">
             <div className="match">
                 <div className="wrapper">
-                    <button className="lws-delete">
+                    <button className="lws-delete" onClick={()=>removeMatch(id)}>
                         <img src={deleteImg} alt="" />
                     </button>
                     <h3 className="lws-matchName">Match {id}</h3>

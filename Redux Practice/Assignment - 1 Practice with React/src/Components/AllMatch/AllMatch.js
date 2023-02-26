@@ -11,8 +11,8 @@ const AllMatch = () => {
 
     const addNewMatch = () => {
         dispatch(addMatch(1));
-        console.log('clicked');
     }
+
     return (
         <div>
             {/* <!-- matches  --> */}

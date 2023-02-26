@@ -1,4 +1,4 @@
-import { ADD_MATCH, INCREMENT } from "./actionIdentifiers";
+import { ADD_MATCH, DELETE_MATCH, INCREMENT } from "./actionIdentifiers";
 
 
 const initialState = {
@@ -29,6 +29,13 @@ export const counterReducer = (state = initialState, action) => {
                 ]
             }
     
+        case DELETE_MATCH : 
+        // console.log(state.matches.filter(match=>match.id !== action.payload));
+            return{
+                ...state,
+                matches : state.matches.filter(match=>match.id !== action.payload)
+            }
+
         default:
             return state;
     }
