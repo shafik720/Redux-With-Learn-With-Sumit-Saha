@@ -1,4 +1,4 @@
-import { ADD_MATCH, DELETE_MATCH, INCREMENT } from "./actionIdentifiers";
+import { ADD_MATCH, DELETE_MATCH, INCREMENT, RESET_MATCH } from "./actionIdentifiers";
 
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
             id : 1,
             incrementValue : 0,
             decrementValue : 0, 
-            score : 0
+            score : 235
         }
     ]
 }
@@ -24,7 +24,7 @@ export const counterReducer = (state = initialState, action) => {
                         id : newId,
                         incrementValue : 0,
                         decrementValue : 0, 
-                        score : 0
+                        score : 255
                     }
                 ]
             }
@@ -35,6 +35,12 @@ export const counterReducer = (state = initialState, action) => {
                 ...state,
                 matches : state.matches.filter(match=>match.id !== action.payload)
             }
+
+        case RESET_MATCH : 
+        return{
+            ...state,
+            matches : state.matches.map(match => ({...match, score : 0 }))
+        }
 
         default:
             return state;
