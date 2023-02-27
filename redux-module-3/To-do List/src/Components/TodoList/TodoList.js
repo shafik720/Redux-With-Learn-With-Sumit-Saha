@@ -3,7 +3,6 @@ import cancelImg from '../../assets/images/cancel.png'
 
 const TodoList = () => {
     return (
-        <div>
             <div
                 className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
                 <div
@@ -32,7 +31,6 @@ const TodoList = () => {
 
                 <img src={cancelImg} className="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer" alt="Cancel" />
             </div>
-        </div>
     );
 };
 
