@@ -42,4 +42,4 @@ export const deleteSingle = (id) => {
         type : DELETED,
         payload : id
     }
-}
+}  
