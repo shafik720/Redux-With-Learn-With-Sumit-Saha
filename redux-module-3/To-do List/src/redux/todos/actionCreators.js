@@ -14,10 +14,10 @@ export const completeAll = () => {
     }
 }
 
-export const toggle = (toggleId) => {
+export const toggle = (id) => {
     return {
         type : TOGGOLED,
-        payload : toggleId,
+        payload : id,
     }
 }
 
