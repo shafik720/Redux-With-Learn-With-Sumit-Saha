@@ -1,9 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { statusChange } from '../../redux/filter/actionCreators';
 
 const Footer = () => {
     // getting state for todo list
     const todoState = useSelector((state) => state.todos);
+
+    // getting state for filtering
+    const filterState = useSelector((state) => state.filter)
+    const status = filterState.status;
+
+    // getting action dispatch for filtering
+    const dispatch = useDispatch();
+
+    const statusChanger = (status) => {
+        dispatch(statusChange(status));
+    }
     
     const todoIncompleteQuantity = () => {
         // const todos = todoState;
@@ -27,11 +39,11 @@ const Footer = () => {
             <div className="mt-4 flex justify-between text-xs text-gray-500">
                 <p>{todoIncompleteQuantity()}</p>
                 <ul className="flex space-x-1 items-center text-xs">
-                    <li className="cursor-pointer font-bold">All</li>
+                    <li className={`cursor-pointer ${status=='all' && 'font-bold'}`} onClick={()=>statusChanger('all')}>All</li>
                     <li>|</li>
-                    <li className="cursor-pointer">Incomplete</li>
+                    <li  className={`cursor-pointer ${status=='incomplete' && 'font-bold'}`} onClick={()=>statusChanger('incomplete')}>Incomplete</li>
                     <li>|</li>
-                    <li className="cursor-pointer">Complete</li>
+                    <li  className={`cursor-pointer ${status=='complete' && 'font-bold'}`} onClick={()=>statusChanger('complete')}>Complete</li>
                     <li></li>
                     <li></li>
                     <li
