@@ -1,11 +1,31 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
+    // getting state for todo list
+    const todoState = useSelector((state) => state.todos);
+    
+    const todoIncompleteQuantity = () => {
+        // const todos = todoState;
+        const quantity = todoState.filter(todo => !todo.completed);
+        const todoNumber = quantity.length;
+
+        switch (todoNumber) {
+            case 0 :
+                return 'No task Left';
+        
+            case 1 : 
+                return '1 Task left';
+
+            default:
+                return `${todoNumber} Tasks left`
+        }
+    }
     return (
         <div>
-            {/* <hr className="mt-4" /> */}
+            <hr className="mt-4" />
             <div className="mt-4 flex justify-between text-xs text-gray-500">
-                <p>2 tasks left</p>
+                <p>{todoIncompleteQuantity()}</p>
                 <ul className="flex space-x-1 items-center text-xs">
                     <li className="cursor-pointer font-bold">All</li>
                     <li>|</li>
