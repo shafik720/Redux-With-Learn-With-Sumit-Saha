@@ -21,7 +21,7 @@ const TodoList = () => {
 
     const filterByColors = todo => {
         const { colors } = filters;
-        console.log(todo);
+        // console.log(todo);
         if (colors.length > 0) {
             return colors.includes(todo?.color)
         }else{
