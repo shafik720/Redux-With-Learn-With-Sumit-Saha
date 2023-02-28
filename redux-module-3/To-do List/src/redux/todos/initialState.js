@@ -4,7 +4,8 @@ export const initialState = [
     {
         id : 1,
         completed : true,
-        text : 'Todo number one'
+        text : 'Todo number one',
+        color : 'green'
     },
     {
         id : 2,

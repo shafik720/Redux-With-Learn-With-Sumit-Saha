@@ -1,14 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import cancelImg from '../../../assets/images/cancel.png'
-import { toggle } from '../../../redux/todos/actionCreators';
+import { colorSelection, toggle } from '../../../redux/todos/actionCreators';
 
 const Todo = ({ todo }) => {
     const { id, completed, text, color } = todo;
     const dispatch  = useDispatch();
 
     const handleToggle = (id) => {
-        dispatch(toggle(id))
+        dispatch(toggle(id));
+    }
+
+    const handleColorChange = (id, color) => {
+        dispatch(colorSelection(id, color));
     }
     return (
         <div>
@@ -28,15 +32,21 @@ const Todo = ({ todo }) => {
                 </div>
 
                 <div
-                    className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-green-500 hover:bg-green-500 bg-green-500">
+                    className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-green-500 hover:bg-green-500 ${color=='green' && 'bg-green-500'}`}
+                    onClick={()=>handleColorChange(id, 'green')}
+                    >
                 </div>
 
                 <div
-                    className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-yellow-500 hover:bg-yellow-500">
+                    className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-yellow-500 hover:bg-yellow-500 ${color=='yellow' && 'bg-yellow-500'}` }
+                    onClick={()=>handleColorChange(id, 'yellow')}
+                    >
                 </div>
 
                 <div
-                    className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-red-500 hover:bg-red-500">
+                    className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-red-500 hover:bg-red-500 ${color=='red' && 'bg-red-500'}`}
+                    onClick={()=>handleColorChange(id, 'red')}
+                    >
                 </div>
 
                 <img src={cancelImg} className="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer" alt="Cancel" />
