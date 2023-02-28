@@ -1,5 +1,5 @@
 import React from 'react';
-import cancelImg from '../../assets/images/cancel.png'
+import cancelImg from '../../../assets/images/cancel.png'
 
 const Todo = () => {
     return (
