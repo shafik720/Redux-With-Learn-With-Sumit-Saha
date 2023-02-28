@@ -1,7 +1,8 @@
 import React from 'react';
 import cancelImg from '../../../assets/images/cancel.png'
 
-const Todo = () => {
+const Todo = ({todo}) => {
+    const {id, completed, text} = todo;
     return (
         <div>
             <div
@@ -15,7 +16,7 @@ const Todo = () => {
                 </div>
 
                 <div className="select-none flex-1">
-                    Learn Redux from Think in a Redux way course
+                    {text}
                     </div>
 
                 <div

@@ -4,9 +4,16 @@ import Todo from './Todo/Todo';
 
 const TodoList = () => {
     const todos = useSelector((state) => state.todos);
-    console.log(todos);
+    console.log(todos.map(index=>index));
     return (
-            <Todo></Todo>
+            <div className="">
+                {
+                    todos.map(todo => <Todo
+                        todo = {todo}
+                        key = {todo.id}
+                    ></Todo>)
+                }
+            </div>
     );
 };
 
