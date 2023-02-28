@@ -33,14 +33,18 @@ export const todoReducer = (state = initialState, action) => {
         case DELETED  : 
                 return state.filter(todo => todo.id !== action.payload);
 
-        // case TOGGOLED : 
-        //         return state.map(todo => {
-        //             if(todo.id == action.payload){
-        //                 return{...todo, completed : !completed}
-        //             }else{
-        //                 return todo;
-        //             }
-        //         })
+        case TOGGOLED : 
+        // console.log(state.map(todo=>todo.completed))
+                return state.map(todo => {
+                    if(todo.id == action.payload){
+                        // console.log(todo.completed)
+                        return{
+                            ...todo, 
+                            completed : !todo.completed
+                        }
+                    }
+                    return todo;
+                })
         default:
             return state;
     }

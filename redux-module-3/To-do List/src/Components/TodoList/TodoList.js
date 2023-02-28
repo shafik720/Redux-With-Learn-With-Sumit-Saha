@@ -4,7 +4,7 @@ import Todo from './Todo/Todo';
 
 const TodoList = () => {
     const todos = useSelector((state) => state.todos);
-    console.log(todos.map(index=>index));
+    // console.log(todos.map(index=>index));
     return (
             <div className="">
                 {
