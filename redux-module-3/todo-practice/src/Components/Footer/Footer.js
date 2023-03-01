@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeStatus } from '../../redux/filters/actionCreators';
+import { changeStatus, selectColor } from '../../redux/filters/actionCreators';
 
 const Footer = () => {
     const todoState = useSelector((state) => state.todo);
@@ -27,6 +27,14 @@ const Footer = () => {
     const changeTaskStatus = (updateStatus) =>{
         dispatch(changeStatus(updateStatus));
     }
+
+    const changeColor = (color) => {
+        if(colors.includes(color)){
+            dispatch(selectColor(color, 'removed'));
+        }else{
+            dispatch(selectColor(color, 'added'));
+        }
+    }
     return (
         <div>
             {/* <hr className="mt-4" /> */}
@@ -41,10 +49,10 @@ const Footer = () => {
                     <li></li>
                     <li></li>
                     <li
-                        className="h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer bg-green-500">
+                        className={`h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer ${colors.includes('green') && 'bg-green-500'}`} onClick={() => changeColor('green')}>
                     </li>
-                    <li className="h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer"></li>
-                    <li className="h-3 w-3 border-2 border-yellow-500 md:hover:bg-yellow-500 rounded-full cursor-pointer">
+                    <li className={`h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer ${colors.includes('red') && 'bg-red-500'}`}  onClick={() => changeColor('red')}></li>
+                    <li className={`h-3 w-3 border-2 border-yellow-500 md:hover:bg-yellow-500 rounded-full cursor-pointer ${colors.includes('yellow') && 'bg-yellow-500'}`}  onClick={() => changeColor('yellow')}>
                     </li>
                 </ul>
             </div>
