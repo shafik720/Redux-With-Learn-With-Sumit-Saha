@@ -1,5 +1,5 @@
 import { initialState } from "./initialState";
-import {ADDTASK, CLEARCOMPLETED, COMPLETEALLTASK, TOGGLE} from './actionIdentifiers';
+import {ADDTASK, CLEARCOMPLETED, COLORSELECT, COMPLETEALLTASK, TOGGLE} from './actionIdentifiers';
 
 const newId = (todo) => {
     const maxId = todo.reduce((maxID, index)=> Math.max(index.id, maxID), -1);
@@ -35,6 +35,17 @@ export const todoReducer = (state = initialState, action) => {
                 }
             })
         
+        case COLORSELECT : 
+            return state.map(todo => {
+                if(todo.id === action.payload.id){
+                    return {
+                        ...todo,
+                        color : action.payload.color 
+                    }
+                }else{
+                    return todo;
+                }
+            })
 
         default:
             return state;

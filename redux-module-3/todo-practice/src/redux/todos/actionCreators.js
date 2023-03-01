@@ -27,13 +27,12 @@ export const deleteTask = (id) => {
     }
 }
 
-export const colorSelect = (id, color, changeType) => {
+export const colorSelect = (id, color) => {
     return{
         type : COLORSELECT,
         payload : {
             id,
-            color,
-            changeType
+            color
         }
     }
 }
