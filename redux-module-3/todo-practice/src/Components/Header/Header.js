@@ -3,7 +3,7 @@ import notesLogo from '../../assets/images/notes.png';
 import doubleTickLogo from '../../assets/images/double-tick.png';
 import plusImg from '../../assets/images/plus.png';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../../redux/todos/actionCreators';
+import { addTask, completeAllTask } from '../../redux/todos/actionCreators';
 
 const Header = () => {
 
@@ -17,6 +17,10 @@ const Header = () => {
     const controlInput = (e) => {
         setInput(e.target.value);
     }
+
+    const completeTask = () => {
+        dispatch(completeAllTask())
+    }
     return (
         <div>
             <div>
@@ -29,7 +33,7 @@ const Header = () => {
                 </form>
 
                 <ul className="flex justify-between my-4 text-xs text-gray-500">
-                    <li className="flex space-x-1 cursor-pointer">
+                    <li onClick={completeTask} className="flex space-x-1 cursor-pointer">
                         <img className="w-4 h-4" src={doubleTickLogo}alt="Complete" />
                         <span>Complete All Tasks</span>
                     </li>

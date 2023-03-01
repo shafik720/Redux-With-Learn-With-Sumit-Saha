@@ -1,5 +1,5 @@
 import { initialState } from "./initialState";
-import {ADDTASK} from './actionIdentifiers';
+import {ADDTASK, COMPLETEALLTASK} from './actionIdentifiers';
 
 const newId = (todo) => {
     const maxId = todo.reduce((maxID, index)=> Math.max(index.id, maxID), -1);
@@ -17,6 +17,9 @@ export const todoReducer = (state = initialState, action) => {
                 }
             ]
     
+        case COMPLETEALLTASK : 
+        // console.log(state.map(todo=>todo.completed))
+            return state.map(todo=>({...todo, completed: true}))
         default:
             return state;
     }
