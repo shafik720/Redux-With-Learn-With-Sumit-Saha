@@ -3,9 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeStatus } from '../../redux/filters/actionCreators';
 
 const Footer = () => {
+    const todoState = useSelector((state) => state.todo);
+    const getTaskQuantity = () => {
+        const task =  todoState.filter(todo => !todo.completed);
+        
+        switch (task.length) {
+            case 0:
+                return "No Tasks Left"
+        
+            case 1 : 
+            return "1 Task Left"
+
+            default:
+                return `${task.length} Tasks Left`;
+        }
+    }
+
     const filterState = useSelector((state) => state.filter);
     const {status, colors} = filterState;
-    console.log(status);
+    
     const dispatch = useDispatch();
 
     const changeTaskStatus = (updateStatus) =>{
@@ -15,7 +31,7 @@ const Footer = () => {
         <div>
             {/* <hr className="mt-4" /> */}
             <div className="mt-4 flex justify-between text-xs text-gray-500">
-                <p>2 tasks left</p>
+                <p>{getTaskQuantity()}</p>
                 <ul className="flex space-x-1 items-center text-xs">
                     <li  onClick={() => changeTaskStatus('all')}  className={`cursor-pointer ${status === 'all' && 'font-bold'}`}>All</li>
                     <li>|</li>
