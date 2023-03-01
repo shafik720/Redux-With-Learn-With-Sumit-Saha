@@ -3,7 +3,7 @@ import notesLogo from '../../assets/images/notes.png';
 import doubleTickLogo from '../../assets/images/double-tick.png';
 import plusImg from '../../assets/images/plus.png';
 import { useDispatch } from 'react-redux';
-import { addTask, completeAllTask } from '../../redux/todos/actionCreators';
+import { addTask, clearCompleted, completeAllTask } from '../../redux/todos/actionCreators';
 
 const Header = () => {
 
@@ -21,6 +21,10 @@ const Header = () => {
     const completeTask = () => {
         dispatch(completeAllTask())
     }
+
+    const clearTask = () => {
+        dispatch(clearCompleted())
+    }
     return (
         <div>
             <div>
@@ -37,7 +41,7 @@ const Header = () => {
                         <img className="w-4 h-4" src={doubleTickLogo}alt="Complete" />
                         <span>Complete All Tasks</span>
                     </li>
-                    <li className="cursor-pointer">Clear completed</li>
+                    <li onClick={clearTask} className="cursor-pointer">Clear completed</li>
                 </ul>
             </div>
             <hr className="mt-4" />
