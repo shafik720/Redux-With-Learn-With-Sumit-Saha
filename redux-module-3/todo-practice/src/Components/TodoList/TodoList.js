@@ -8,8 +8,8 @@ const TodoList = () => {
     
     const filterState = useSelector((state) => state.filter);
     
-    const {status, color} = filterState;
-    console.log(status);
+    const {status, colors} = filterState;
+    console.log(colors);
     return (
             <div>
                 {
@@ -22,6 +22,12 @@ const TodoList = () => {
                                 return !todo.completed
                             default:
                                 return true;
+                        }
+                    }).filter(todo=> {
+                        if(colors.length > 0) {
+                            return colors.includes(todo?.color);
+                        }else{
+                            return true;
                         }
                     }).map(todo => <Todo
                         key = {todo.id}
