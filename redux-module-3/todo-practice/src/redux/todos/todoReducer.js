@@ -1,5 +1,5 @@
 import { initialState } from "./initialState";
-import {ADDTASK, CLEARCOMPLETED, COLORSELECT, COMPLETEALLTASK, TOGGLE} from './actionIdentifiers';
+import {ADDTASK, CLEARCOMPLETED, COLORSELECT, COMPLETEALLTASK, DELETETASK, TOGGLE} from './actionIdentifiers';
 
 const newId = (todo) => {
     const maxId = todo.reduce((maxID, index)=> Math.max(index.id, maxID), -1);
@@ -46,6 +46,9 @@ export const todoReducer = (state = initialState, action) => {
                     return todo;
                 }
             })
+
+        case DELETETASK :
+            return state.filter(todo => todo.id !== action.payload);
 
         default:
             return state;
