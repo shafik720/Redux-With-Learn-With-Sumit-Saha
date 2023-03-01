@@ -1,5 +1,5 @@
 
-
+import {ADDTASK, COMPLETEALLTASK, CLEARCOMPLETED, DELETETASK, COLORSELECT, TOGGLE } from './actionIdentifiers';
 
 export const addTask = (text) => {
     return{

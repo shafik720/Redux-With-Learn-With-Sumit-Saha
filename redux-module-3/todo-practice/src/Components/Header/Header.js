@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import notesLogo from '../../assets/images/notes.png';
 import doubleTickLogo from '../../assets/images/double-tick.png';
 import plusImg from '../../assets/images/plus.png';
+import { useDispatch } from 'react-redux';
+import { addTask } from '../../redux/todos/actionCreators';
 
 const Header = () => {
+
+    const dispatch = useDispatch();
+
+    const [input, setInput] = useState('');
+    const submitForm = (e) => {
+        e.preventDefault();
+        dispatch(addTask(input));
+    }
+    const controlInput = (e) => {
+        setInput(e.target.value);
+    }
     return (
         <div>
             <div>
-                <form className="flex items-center bg-gray-100 px-4 py-4 rounded-md">
+                <form className="flex items-center bg-gray-100 px-4 py-4 rounded-md" onSubmit={submitForm}>
                     <img src={notesLogo} className="w-6 h-6" alt="Add todo" />
-                    <input type="text" placeholder="Type your todo"
+                    <input value={input} onChange={controlInput} type="text" placeholder="Type your todo"
                         className="w-full text-lg px-4 py-1 border-none outline-none bg-gray-100 text-gray-500" />
                     <button type="submit"
                         className={`appearance-none w-8 h-8 bg-[url("${plusImg}")] bg-no-repeat bg-contain`} ></button>

@@ -11,7 +11,7 @@ export const todoReducer = (state = initialState, action) => {
             return [
                 ...state,
                 {
-                    id : newId,
+                    id : newId(state),
                     completed : false,
                     text : action.payload
                 }
