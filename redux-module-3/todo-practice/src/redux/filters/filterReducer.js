@@ -1,5 +1,6 @@
-import { initialState } from "../todos/initialState";
+
 import { STATUS } from "./actionIdentifiers";
+import { initialState } from "./initialState";
 
 
 export const filterReducer = (state = initialState, action) => {
@@ -16,7 +17,7 @@ export const filterReducer = (state = initialState, action) => {
                     status : 'incomplete'
                 }
             }else{
-                return state;
+                return { ...state, status : 'all'}
             }
     
         default:

@@ -1,19 +1,27 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeStatus } from '../../redux/filters/actionCreators';
 
 const Footer = () => {
-    const filterState = useSelector((state) => state.filter)
+    const filterState = useSelector((state) => state.filter);
+    const {status, colors} = filterState;
+    console.log(status);
+    const dispatch = useDispatch();
+
+    const changeTaskStatus = (updateStatus) =>{
+        dispatch(changeStatus(updateStatus));
+    }
     return (
         <div>
             {/* <hr className="mt-4" /> */}
             <div className="mt-4 flex justify-between text-xs text-gray-500">
                 <p>2 tasks left</p>
                 <ul className="flex space-x-1 items-center text-xs">
-                    <li className="cursor-pointer font-bold">All</li>
+                    <li  onClick={() => changeTaskStatus('all')}  className={`cursor-pointer ${status === 'all' && 'font-bold'}`}>All</li>
                     <li>|</li>
-                    <li className="cursor-pointer">Incomplete</li>
+                    <li onClick={() => changeTaskStatus('incomplete')}   className={`cursor-pointer ${status === 'incomplete' && 'font-bold'}`}>Incomplete</li>
                     <li>|</li>
-                    <li className="cursor-pointer">Complete</li>
+                    <li onClick={() => changeTaskStatus('complete')}  className={`cursor-pointer ${status === 'completed' && 'font-bold'}`}>Complete</li>
                     <li></li>
                     <li></li>
                     <li

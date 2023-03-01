@@ -5,7 +5,7 @@ import Todo from './Todo/Todo';
 
 const TodoList = () => {
     const todoState = useSelector((state) => state.todo);
-    console.log(todoState);
+    // console.log(todoState);
     return (
             <div>
                 {
