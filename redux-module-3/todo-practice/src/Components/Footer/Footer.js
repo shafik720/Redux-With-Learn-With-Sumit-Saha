@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
+    const filterState = useSelector((state) => state.filter)
     return (
         <div>
             {/* <hr className="mt-4" /> */}
