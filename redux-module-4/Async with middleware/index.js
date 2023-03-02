@@ -1,4 +1,5 @@
 const { createStore, applyMiddleware } = require("redux");
+const { fetchingFunction } = require("./funtions");
 const { delayMiddleWare, fetchingMiddleWare } = require("./middleWare");
 
 const initialState = {
@@ -41,6 +42,4 @@ store.subscribe(() => {
 //     payload : 'Todo Number two'
 // });
 
-store.dispatch({
-    type : 'todo/fakeAction'
-})
+store.dispatch(fetchingFunction)

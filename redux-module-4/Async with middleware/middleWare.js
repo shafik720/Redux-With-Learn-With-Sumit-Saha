@@ -14,17 +14,8 @@ const delayMiddleWare = (store)=>(next)=>(action)=> {
 }
 
 const fetchingMiddleWare = (store) => (next) => async(action) => {
-    if(action.type === 'todo/fakeAction'){
-        const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=5');
-        const todo = await response.json();
-
-        store.dispatch({
-            type : 'todos/loaded',
-            payload : todo
-        })
-        console.log(`Number of updated todos: ${store.getState().todos.length}`);
-
-        return;
+    if(typeof action == 'function'){
+        return action(store.dispatch, store.getState)
     }
     return next(action);
 }
