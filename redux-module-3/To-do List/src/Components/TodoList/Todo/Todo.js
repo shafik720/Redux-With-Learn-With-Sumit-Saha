@@ -4,6 +4,7 @@ import cancelImg from '../../../assets/images/cancel.png'
 import { colorSelection, deleteSingle, toggle } from '../../../redux/todos/actionCreators';
 import toggleChange from '../../../redux/thunk/toggleChange'
 import colorChange from '../../../redux/thunk/colorChange';
+import deleteWithThunk from '../../../redux/thunk/deleteWithThunk';
 
 const Todo = ({ todo }) => {
     const { id, completed, text, color } = todo;
@@ -18,7 +19,7 @@ const Todo = ({ todo }) => {
     }
 
     const handleDelete = (id) => {
-        dispatch(deleteSingle(id));
+        dispatch(deleteWithThunk(id));
     }
     return (
         <div>
