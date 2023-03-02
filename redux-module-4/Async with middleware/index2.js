@@ -18,6 +18,16 @@ const todoReducer = (state = initialState, action) => {
                     }
                 ]
             }
+        case 'todo/parallalAdded':
+            return{
+                ...state,
+                todos : [
+                    ...state.todos, 
+                    {
+                        title : action.payload
+                    }
+                ]
+            }
     
         case 'todo/loadedData':
             return{
@@ -41,4 +51,9 @@ store.subscribe(()=>{
 store.dispatch({
     type: 'todo/added',
     payload : 'Todo number two'
+})
+
+store.dispatch({
+    type : 'todo/parallalAdded',
+    payload : 'Another Todo'
 })
