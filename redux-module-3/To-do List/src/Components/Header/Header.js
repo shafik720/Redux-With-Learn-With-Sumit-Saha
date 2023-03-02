@@ -4,6 +4,7 @@ import doubleTickLogo from '../../assets/images/double-tick.png';
 import plusImg from '../../assets/images/plus.png';
 import { useDispatch } from 'react-redux';
 import { addTask, clearCompleted, completeAll } from '../../redux/todos/actionCreators';
+import addToDo from '../../redux/thunk/addToDo';
 
 const Header = () => {
     // making a controlled input field by state with react
@@ -16,7 +17,7 @@ const Header = () => {
     // for adding new task
     const addNewTask = (e) => {
         e.preventDefault();
-        dispatch(addTask(input));
+        dispatch(addToDo(input));
     }
 
     // for making all task completed
