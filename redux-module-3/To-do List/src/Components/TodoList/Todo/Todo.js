@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import cancelImg from '../../../assets/images/cancel.png'
 import { colorSelection, deleteSingle, toggle } from '../../../redux/todos/actionCreators';
 import toggleChange from '../../../redux/thunk/toggleChange'
+import colorChange from '../../../redux/thunk/colorChange';
 
 const Todo = ({ todo }) => {
     const { id, completed, text, color } = todo;
@@ -13,7 +14,7 @@ const Todo = ({ todo }) => {
     }
 
     const handleColorChange = (id, color) => {
-        dispatch(colorSelection(id, color));
+        dispatch(colorChange(id, color));
     }
 
     const handleDelete = (id) => {
