@@ -1,4 +1,5 @@
-const { createStore } = require("redux");
+const { createStore, applyMiddleware } = require("redux");
+const { delayMiddleWare } = require("./middleWare");
 
 const initialState = {
     todos : []
@@ -29,7 +30,7 @@ const todoReducer = (state = initialState, action) => {
     }
 }
 
-const store = createStore(todoReducer);
+const store = createStore(todoReducer, applyMiddleware(delayMiddleWare));
 
 store.subscribe(() => {
     console.log(store.getState());
@@ -37,6 +38,6 @@ store.subscribe(() => {
 
 store.dispatch({
     type : 'todos/added',
-    payload : 'Todo Number One'
+    payload : 'Todo Number two'
 });
 
