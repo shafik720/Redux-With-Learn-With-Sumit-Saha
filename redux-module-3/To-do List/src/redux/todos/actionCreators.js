@@ -1,5 +1,12 @@
 
-import {ADDED, ALLCOMPLETE, CLEARCOMPLETE, COLORSELECTED, DELETED, TOGGOLED} from './actionIdentifiers'
+import {ADDED, ALLCOMPLETE, CLEARCOMPLETE, COLORSELECTED, DELETED, TOGGOLED, LOADED} from './actionIdentifiers'
+
+export const loadServer = (todos) => {
+    return{
+        type : LOADED,
+        payload : todos
+    }
+}
 
 export const addTask = (todoText) => {
     return{

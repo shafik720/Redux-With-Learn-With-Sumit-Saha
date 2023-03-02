@@ -1,10 +1,18 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import fetchData from '../../redux/thunk/fetchData';
 import Todo from './Todo/Todo';
 
 const TodoList = () => {
     const todos = useSelector((state) => state.todos);
     const filters = useSelector((state) => state.filter);
+
+    // load data from server with Redux Thunk 
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(fetchData);
+    },[dispatch])
 
     const filterByStatus = todo => {
         const { status } = filters;
