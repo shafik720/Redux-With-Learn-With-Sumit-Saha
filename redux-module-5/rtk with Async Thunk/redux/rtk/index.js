@@ -1,5 +1,6 @@
 const store = require("./app/store");
 const { actionCreators } = require("./features/counter");
+const { fetchPost } = require("./features/postWithThunk/posts");
 
 
 
@@ -10,6 +11,8 @@ store.subscribe(()=>{
 })
 
 
-store.dispatch(actionCreators.increment())
-store.dispatch(actionCreators.increment())
-store.dispatch(actionCreators.decrement())
+// store.dispatch(actionCreators.increment())
+// store.dispatch(actionCreators.increment())
+// store.dispatch(actionCreators.decrement())
+
+store.dispatch(fetchPost())

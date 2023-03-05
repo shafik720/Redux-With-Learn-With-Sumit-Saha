@@ -1,4 +1,6 @@
-const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit")
+const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
+const fetch = require("node-fetch");
+
 
 
 const initialState = {
