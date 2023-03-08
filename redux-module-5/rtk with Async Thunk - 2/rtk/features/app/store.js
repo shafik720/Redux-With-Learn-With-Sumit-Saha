@@ -1,11 +1,11 @@
 const { configureStore } = require("@reduxjs/toolkit");
-const counterSlice = require("../features/counter")
-
+const counterReducer = require('../counter/counterSlice')
 
 const store = configureStore({
     reducer : {
-        counter : counterSlice
+        counter : counterReducer
     }
 })
 
-module.exports = store;
+
+module.exports = store
