@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { newTransaction } from '../../../features/transactions/transactions';
-import { addTransaction } from '../../../features/transactions/transactionsApi';
 
 const CardBody = () => {
     const [title, setTitle] = useState('');
