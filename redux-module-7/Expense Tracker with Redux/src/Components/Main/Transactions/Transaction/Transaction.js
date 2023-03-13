@@ -1,10 +1,20 @@
 import React from 'react';
 import editImg from '../../../../assets/images/edit.svg';
 import deleteImg from '../../../../assets/images/delete.svg';
+import { useDispatch } from 'react-redux';
+import { activeEdit } from '../../../../features/transactions/transactions';
 
 const Transaction = ({transaction}) => {
-    const {name, type, amount, id} = transaction;
-    console.log(name)
+    const {name, type, amount} = transaction;
+    const dispatch = useDispatch();
+
+    const handleEdit = () => {
+        dispatch(activeEdit({
+            name,
+            type,
+            amount
+        }));
+    }
     return (
         <div className="conatiner_of_list_of_transactions">
             <ul>
@@ -12,7 +22,7 @@ const Transaction = ({transaction}) => {
                     <p>{name}</p>
                     <div className="right">
                         <p>৳ {amount}</p>
-                        <button className="link">
+                        <button className="link" onClick={handleEdit}>
                             <img
                                 className="icon"
                                 src={editImg}
