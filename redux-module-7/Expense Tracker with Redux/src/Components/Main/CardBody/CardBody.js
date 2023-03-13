@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { newTransaction } from '../../../features/transactions/transactions';
 
@@ -19,7 +19,18 @@ const CardBody = () => {
     }
 
     const transactionState = useSelector(state => state.transaction);
-    const {error, isError} = transactionState;
+    const {error, isError, editing} = transactionState;
+    const[isEdit, setIsEdit] = useState(false);
+    useEffect(()=>{
+        const {id} = editing || {};
+        console.log(id)
+        if(id){
+            setIsEdit(true);
+        }else{
+            setIsEdit(false);
+        }
+    },[editing])
+
     return (
         <div className="form">
             <h3>Add new transaction</h3>
@@ -77,7 +88,7 @@ const CardBody = () => {
             </form>
             
             {isError && <p>{error}</p>}
-            <button className="btn cancel_edit">Cancel Edit</button>
+            {isEdit && <button className="btn cancel_edit">Cancel Edit</button>}
         </div>
     );
 };

@@ -42,3 +42,7 @@
 .error-bg{
   background: #E40D0D;
 }
+
+.cancel_edit{
+  display : block;
+}

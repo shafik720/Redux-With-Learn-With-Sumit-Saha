@@ -5,14 +5,15 @@ import { useDispatch } from 'react-redux';
 import { activeEdit } from '../../../../features/transactions/transactions';
 
 const Transaction = ({transaction}) => {
-    const {name, type, amount} = transaction;
+    const {name, type, amount, id} = transaction;
     const dispatch = useDispatch();
 
     const handleEdit = () => {
         dispatch(activeEdit({
             name,
             type,
-            amount
+            amount,
+            id
         }));
     }
     return (
