@@ -35,7 +35,7 @@ const CardBody = () => {
 
     return (
         <div className="form">
-            <h3>Add new transaction</h3>
+            {isEdit ? <h3>Edit transaction</h3> : <h3>Add new transaction</h3>}
 
             <form action="" onSubmit={handleCreateSubmit}>
                 <div className="form-group">
@@ -85,8 +85,8 @@ const CardBody = () => {
                         onChange = {e => setAmount(e.target.value)}
                     />
                 </div>
-
-                <button className="btn">Add Transaction</button>
+                {isEdit ? <button className="btn">Update Transaction</button> : <button className="btn">Add Transaction</button>}
+                
             </form>
             
             {isError && <p>{error}</p>}
