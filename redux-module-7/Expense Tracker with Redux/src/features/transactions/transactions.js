@@ -36,7 +36,7 @@ const transactionSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder
-        // ------------------- for fetchTransaction
+            // ------------------- for fetchTransaction
             .addCase(fetchTransactions.pending, (state) => {
                 state.transactions = [];
                 state.isLoading = true;
@@ -58,7 +58,6 @@ const transactionSlice = createSlice({
 
             // ---------------- for adding new transaction
             .addCase(newTransaction.pending, (state) => {
-                state.transactions = [];
                 state.isLoading = true;
                 state.isError = false;
                 state.error = '';
@@ -75,6 +74,22 @@ const transactionSlice = createSlice({
                 state.error = action.error?.message;
             })
             // --------------------------- for editing transaction
-            // --------------------------- for deleting transaction
+            .addCase(changeTransactions.pending, (state) => {
+                state.isLoading = true;
+                state.isError = false;
+            })
+            .addCase(changeTransactions.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                const indexToUpdate = state.transactions.findIndex( (t) => t.id === action.payload.id);
+
+                state.transactions[indexToUpdate] = action.payload;
+            })
+            .addCase(newTransaction.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.error = action.error?.message;
+            })
+        // --------------------------- for deleting transaction
     }
 })
