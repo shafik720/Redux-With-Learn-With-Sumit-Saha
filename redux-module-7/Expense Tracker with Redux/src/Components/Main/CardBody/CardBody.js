@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { newTransaction } from '../../../features/transactions/transactions';
 import { addTransaction } from '../../../features/transactions/transactionsApi';
 
@@ -11,7 +11,6 @@ const CardBody = () => {
     const dispatch = useDispatch();
     const handleCreateSubmit = (e) =>{
         e.preventDefault();
-        // console.log({title, type, amount});
         dispatch(
             newTransaction({
             name : title,
@@ -19,6 +18,9 @@ const CardBody = () => {
             amount : Number(amount) 
         }))
     }
+
+    const transactionState = useSelector(state => state.transaction);
+    const {error, isError} = transactionState;
     return (
         <div className="form">
             <h3>Add new transaction</h3>
@@ -74,8 +76,8 @@ const CardBody = () => {
 
                 <button className="btn">Add Transaction</button>
             </form>
-
-
+            
+            {isError && <p>{error}</p>}
             <button className="btn cancel_edit">Cancel Edit</button>
         </div>
     );
