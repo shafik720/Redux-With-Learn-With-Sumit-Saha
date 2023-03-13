@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { newTransaction } from '../../../features/transactions/transactions';
+import { deActiveEdit, newTransaction } from '../../../features/transactions/transactions';
 
 const CardBody = () => {
     const [title, setTitle] = useState('');
@@ -18,12 +18,14 @@ const CardBody = () => {
         }))
     }
 
+    const handleCancelEdit = () => {
+        dispatch(deActiveEdit());
+    }
     const transactionState = useSelector(state => state.transaction);
     const {error, isError, editing} = transactionState;
     const[isEdit, setIsEdit] = useState(false);
     useEffect(()=>{
         const {id} = editing || {};
-        console.log(id)
         if(id){
             setIsEdit(true);
         }else{
@@ -88,7 +90,7 @@ const CardBody = () => {
             </form>
             
             {isError && <p>{error}</p>}
-            {isEdit && <button className="btn cancel_edit">Cancel Edit</button>}
+            {isEdit && <button className="btn cancel_edit" onClick={handleCancelEdit}>Cancel Edit</button>}
         </div>
     );
 };

@@ -38,6 +38,9 @@ const transactionSlice = createSlice({
     reducers: {
         activeEdit: (state, action) => {
             state.editing = action.payload;
+        },
+        deActiveEdit : (state, action) => {
+            state.editing = {};
         }
     },
     extraReducers: (builder) => {
@@ -115,4 +118,4 @@ const transactionSlice = createSlice({
 })
 
 export default transactionSlice.reducer;
-export const { activeEdit } = transactionSlice.actions;
+export const { activeEdit , deActiveEdit } = transactionSlice.actions;
