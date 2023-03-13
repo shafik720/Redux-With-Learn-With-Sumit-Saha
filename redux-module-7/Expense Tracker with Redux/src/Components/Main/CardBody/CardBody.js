@@ -25,9 +25,11 @@ const CardBody = () => {
     const {error, isError, editing} = transactionState;
     const[isEdit, setIsEdit] = useState(false);
     useEffect(()=>{
-        const {id} = editing || {};
+        const {id, name, type} = editing || {};
+        console.log(name);
         if(id){
             setIsEdit(true);
+            setTitle(name);
         }else{
             setIsEdit(false);
         }
