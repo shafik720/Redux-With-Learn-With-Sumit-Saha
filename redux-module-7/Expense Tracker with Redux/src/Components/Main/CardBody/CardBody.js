@@ -5,7 +5,7 @@ const CardBody = () => {
     const [type, setType] = useState('');
     const [amount, setAmount] = useState('');
 
-    console.log(title);
+    // console.log(title);
     return (
         <div className="form">
             <h3>Add new transaction</h3>
@@ -27,8 +27,9 @@ const CardBody = () => {
                         <input
                             type="radio"
                             value="income"
-                            name="transaction_type"
-                            checked
+                            name="type"
+                            checked = {type === 'income'}
+                            onChange = {() => setType('income')}
                         />
                         <label>Income</label>
                     </div>
@@ -36,8 +37,10 @@ const CardBody = () => {
                         <input
                             type="radio"
                             value="expense"
-                            name="transaction_type"
+                            name="type"
                             placeholder="Expense"
+                            checked = {type === 'expense'}
+                            onChange= {e => setType('expense')}
                         />
                         <label>Expense</label>
                     </div>
