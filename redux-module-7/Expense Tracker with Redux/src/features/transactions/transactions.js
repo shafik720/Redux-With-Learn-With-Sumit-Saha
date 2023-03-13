@@ -107,3 +107,5 @@ const transactionSlice = createSlice({
             })
     }
 })
+
+export default transactionSlice.reducer;

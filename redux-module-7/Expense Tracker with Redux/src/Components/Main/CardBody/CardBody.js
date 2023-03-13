@@ -1,53 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const CardBody = () => {
+    const [title, setTitle] = useState('');
+    const [type, setType] = useState('');
+    const [amount, setAmount] = useState('');
+
+    console.log(title);
     return (
-        <div class="form">
+        <div className="form">
             <h3>Add new transaction</h3>
 
-            <div class="form-group">
-                <label for="transaction_name">Name</label>
-                <input
-                    type="text"
-                    name="transaction_name"
-                    placeholder="My Salary"
-                />
-            </div>
-
-            <div class="form-group radio">
-                <label for="transaction_type">Type</label>
-                <div class="radio_group">
+            <form action="">
+                <div className="form-group">
+                    <label>Name</label>
                     <input
-                        type="radio"
-                        value="income"
-                        name="transaction_type"
-                        checked
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                        onChange={e => setTitle(e.target.value)}
                     />
-                    <label for="transaction_type">Income</label>
                 </div>
-                <div class="radio_group">
+
+                <div className="form-group radio">
+                    <label>Type</label>
+                    <div className="radio_group">
+                        <input
+                            type="radio"
+                            value="income"
+                            name="transaction_type"
+                            checked
+                        />
+                        <label>Income</label>
+                    </div>
+                    <div className="radio_group">
+                        <input
+                            type="radio"
+                            value="expense"
+                            name="transaction_type"
+                            placeholder="Expense"
+                        />
+                        <label>Expense</label>
+                    </div>
+                </div>
+
+                <div className="form-group">
+                    <label>Amount</label>
                     <input
-                        type="radio"
-                        value="expense"
-                        name="transaction_type"
-                        placeholder="Expense"
+                        type="number"
+                        placeholder="300"
+                        name="transaction_amount"
                     />
-                    <label for="transaction_type">Expense</label>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="transaction_amount">Amount</label>
-                <input
-                    type="number"
-                    placeholder="300"
-                    name="transaction_amount"
-                />
-            </div>
+                <button className="btn">Add Transaction</button>
+            </form>
 
-            <button class="btn">Add Transaction</button>
 
-            <button class="btn cancel_edit">Cancel Edit</button>
+            <button className="btn cancel_edit">Cancel Edit</button>
         </div>
     );
 };

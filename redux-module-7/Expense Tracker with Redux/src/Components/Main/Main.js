@@ -5,13 +5,13 @@ import CardHeader from './CardHeader/CardHeader';
 
 const Main = () => {
     return (
-        <div class="main">
-            <div class="container">
+        <div className="main">
+            <div className="container">
                 <CardHeader></CardHeader>
 
                 <CardBody></CardBody>
 
-                <p class="second_heading">Your Transactions:</p>
+                <p className="second_heading">Your Transactions:</p>
 
                 <CardBottom></CardBottom>
             </div>
