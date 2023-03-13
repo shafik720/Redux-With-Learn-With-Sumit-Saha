@@ -1,22 +1,36 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { newTransaction } from '../../../features/transactions/transactions';
+import { addTransaction } from '../../../features/transactions/transactionsApi';
 
 const CardBody = () => {
     const [title, setTitle] = useState('');
     const [type, setType] = useState('');
     const [amount, setAmount] = useState('');
 
-    // console.log(title);
+    const dispatch = useDispatch();
+    const handleCreateSubmit = (e) =>{
+        e.preventDefault();
+        // console.log({title, type, amount});
+        dispatch(
+            newTransaction({
+            name : title,
+            type : type,
+            amount : Number(amount) 
+        }))
+    }
     return (
         <div className="form">
             <h3>Add new transaction</h3>
 
-            <form action="">
+            <form action="" onSubmit={handleCreateSubmit}>
                 <div className="form-group">
                     <label>Name</label>
                     <input
                         type="text"
                         name="title"
                         placeholder="Title"
+                        required
                         onChange={e => setTitle(e.target.value)}
                     />
                 </div>
@@ -28,6 +42,7 @@ const CardBody = () => {
                             type="radio"
                             value="income"
                             name="type"
+                            required
                             checked = {type === 'income'}
                             onChange = {() => setType('income')}
                         />
@@ -51,7 +66,9 @@ const CardBody = () => {
                     <input
                         type="number"
                         placeholder="300"
-                        name="transaction_amount"
+                        name="amount"
+                        required
+                        onChange = {e => setAmount(e.target.value)}
                     />
                 </div>
 

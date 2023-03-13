@@ -15,15 +15,15 @@ export const fetchTransactions = createAsyncThunk('transaction/fetchData', async
     return data;
 })
 
+export const newTransaction = createAsyncThunk('transaction/addData', async (data) => {
+    const transaction = await addTransaction(data);
+    return transaction;
+})
 export const changeTransactions = createAsyncThunk('transaction/editData', async ({ id, data }) => {
     const transaction = await editTransaction({ id, data });
     return transaction;
 })
 
-export const newTransaction = createAsyncThunk('transaction/addData', async ({ data }) => {
-    const transaction = await addTransaction({ data });
-    return transaction;
-})
 
 export const removeTransaction = createAsyncThunk('transaction/deleteData', async ({ id }) => {
     const transaction = await deleteTransaction({ id });

@@ -7,8 +7,8 @@ export const getTransactionData = async() => {
     return response.data;
 }
 
-export const addTransaction = async({data}) => {
-    const response = await axios.post(`/transactions`, data);
+export const addTransaction = async(datas) => {
+    const response = await axios.post(`/transactions`, datas);
     return response.data;
 }
 
