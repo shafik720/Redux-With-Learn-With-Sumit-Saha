@@ -26,8 +26,8 @@ export const changeTransactions = createAsyncThunk('transaction/editData', async
 })
 
 
-export const removeTransaction = createAsyncThunk('transaction/deleteData', async ({ id }) => {
-    const transaction = await deleteTransaction({ id });
+export const removeTransaction = createAsyncThunk('transaction/deleteData', async (id) => {
+    const transaction = await deleteTransaction(id);
     return transaction;
 })
 
@@ -105,9 +105,10 @@ const transactionSlice = createSlice({
                 state.isError = false;
             })
             .addCase(removeTransaction.fulfilled, (state, action) => {
+                // console.log(action);
                 state.isLoading = false;
                 state.isError = false;
-                state.transactions.filter(index => index.id !== action.payload.id);
+                state.transactions = state.transactions.filter(index => index.id !== action.meta.arg);
             })
             .addCase(removeTransaction.rejected, (state, action) => {
                 state.isLoading = false;

@@ -35,8 +35,9 @@ const CardBody = () => {
                     amount
                 }
             }))
+            setIsEdit(false);
         }
-        resetForm();
+        // resetForm();
     }
 
     const resetForm = () => {

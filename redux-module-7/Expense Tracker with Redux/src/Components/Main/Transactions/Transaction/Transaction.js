@@ -2,7 +2,7 @@ import React from 'react';
 import editImg from '../../../../assets/images/edit.svg';
 import deleteImg from '../../../../assets/images/delete.svg';
 import { useDispatch } from 'react-redux';
-import { activeEdit } from '../../../../features/transactions/transactions';
+import { activeEdit, removeTransaction } from '../../../../features/transactions/transactions';
 
 const Transaction = ({transaction}) => {
     const {name, type, amount, id} = transaction;
@@ -15,6 +15,11 @@ const Transaction = ({transaction}) => {
             amount,
             id
         }));
+    }
+
+    // --- deleting a transaction
+    const handleDelete = () => {
+        dispatch(removeTransaction(id));
     }
     return (
         <div className="conatiner_of_list_of_transactions">
@@ -29,7 +34,7 @@ const Transaction = ({transaction}) => {
                                 src={editImg}
                             />
                         </button>
-                        <button className="link">
+                        <button className="link" onClick={handleDelete}>
                             <img
                                 className="icon"
                                 src={deleteImg}
