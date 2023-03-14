@@ -8,6 +8,7 @@ const CardBody = () => {
     const [amount, setAmount] = useState('');
 
     const dispatch = useDispatch();
+    // --- adding new transactions
     const handleCreateSubmit = (e) =>{
         e.preventDefault();
         dispatch(
@@ -15,21 +16,35 @@ const CardBody = () => {
             name : title,
             type : type,
             amount : Number(amount) 
-        }))
+        }));
+        resetForm();
     }
 
+    const resetForm = () => {
+        setTitle('');
+        setType('');
+        setAmount('');
+    }
+    // --- Cancel Edit functionality
     const handleCancelEdit = () => {
         dispatch(deActiveEdit());
+        resetForm();
     }
+
+    // --- getting state for editing transaction
     const transactionState = useSelector(state => state.transaction);
     const {error, isError, editing} = transactionState;
     const[isEdit, setIsEdit] = useState(false);
+
     useEffect(()=>{
         const {id, name, type} = editing || {};
-        console.log(name);
+        
         if(id){
+            // --- passing all information to the form for editing transaction
             setIsEdit(true);
             setTitle(name);
+            setType(type);
+            setAmount(editing.amount)
         }else{
             setIsEdit(false);
         }
@@ -47,6 +62,7 @@ const CardBody = () => {
                         name="title"
                         placeholder="Title"
                         required
+                        value = {title}
                         onChange={e => setTitle(e.target.value)}
                     />
                 </div>
@@ -81,9 +97,9 @@ const CardBody = () => {
                     <label>Amount</label>
                     <input
                         type="number"
-                        placeholder="300"
                         name="amount"
                         required
+                        value = {amount}
                         onChange = {e => setAmount(e.target.value)}
                     />
                 </div>
