@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deActiveEdit, newTransaction } from '../../../features/transactions/transactions';
+import { changeTransactions, deActiveEdit, newTransaction } from '../../../features/transactions/transactions';
 
 const CardBody = () => {
     const [title, setTitle] = useState('');
@@ -8,8 +8,14 @@ const CardBody = () => {
     const [amount, setAmount] = useState('');
     const [isEdit, setIsEdit] = useState(false);
 
+    // --- getting state for editing transaction
+    const transactionState = useSelector(state => state.transaction);
+    const { error, isError, editing } = transactionState;
+    const { id, name, type: editType } = editing || {};
+    // console.log(transactionState.editing);
+
     const dispatch = useDispatch();
-    // --- adding new transactions
+    // -------------------------- adding new transactions
     const handleCreateSubmit = (e) => {
         e.preventDefault();
         if (!isEdit) {
@@ -19,6 +25,16 @@ const CardBody = () => {
                     type: type,
                     amount: Number(amount)
                 }));
+        } else if (isEdit) {
+
+            dispatch(changeTransactions({
+                id : editing?.id,
+                data: {
+                    name : title,
+                    type,
+                    amount
+                }
+            }))
         }
         resetForm();
     }
@@ -34,18 +50,12 @@ const CardBody = () => {
         resetForm();
     }
 
-    // --- getting state for editing transaction
-    const transactionState = useSelector(state => state.transaction);
-    const { error, isError, editing } = transactionState;
-
+    // --- passing all information to the form for editing transaction
     useEffect(() => {
-        const { id, name, type } = editing || {};
-
         if (id) {
-            // --- passing all information to the form for editing transaction
             setIsEdit(true);
             setTitle(name);
-            setType(type);
+            setType(editType);
             setAmount(editing.amount)
         } else {
             setIsEdit(false);

@@ -5,8 +5,9 @@ import Transaction from './Transaction/Transaction';
 
 const Transactions = () => {
     const transactionState = useSelector(state => state.transaction);
-    // console.log(transactionState);
+    
     const {isLoading, isError, error, transactions} = transactionState ;
+    // console.log(transactionState);
 
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -17,7 +18,7 @@ const Transactions = () => {
     if(isLoading && !isError) content = <p>Loading...</p>;
     if(!isLoading && isError) content = <p>{error}</p>
     if(!isLoading && !isError && transactions.length === 0) content = <p>No Transactions Found !</p>
-    if(!isLoading && !isError && transactions.length > 0) content = transactions.map(transaction => <Transaction transaction={transaction} key={transaction.id}></Transaction>)
+    if(!isLoading && !isError && transactions.length > 0) content = transactions.map(transaction => <Transaction transaction={transaction} key={transaction?.id}></Transaction>)
 
     return (
         <div>

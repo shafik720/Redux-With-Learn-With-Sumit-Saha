@@ -91,8 +91,8 @@ const transactionSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 const indexToUpdate = state.transactions.findIndex((t) => t.id === action.payload.id);
-
-                state.transactions[indexToUpdate] = action.payload.data;
+                // console.log(action.payload);
+                state.transactions[indexToUpdate] = action.payload;
             })
             .addCase(changeTransactions.rejected, (state, action) => {
                 state.isLoading = false;
