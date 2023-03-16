@@ -2,6 +2,7 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
 
 export const apiSlice = createApi({
     reducerPath : 'api',
+    tagTypes : ['videos'] ,
     baseQuery : fetchBaseQuery({
         baseUrl : 'http://localhost:9000',
     }),
@@ -9,6 +10,8 @@ export const apiSlice = createApi({
 
         getVideos : builder.query({
             query : () => '/videos',
+            keepUnusedDataFor : 600 ,
+            providesTags : ['videos']
         }),
 
         getVideo : builder.query({
@@ -30,7 +33,8 @@ export const apiSlice = createApi({
                 url : '/videos',
                 method : 'POST',
                 body : data
-            })
+            }),
+            invalidatesTags : ["videos"]
         })
     }),
 })
