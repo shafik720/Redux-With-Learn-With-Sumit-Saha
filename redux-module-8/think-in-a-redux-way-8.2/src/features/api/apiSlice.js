@@ -6,12 +6,15 @@ export const apiSlice = createApi({
         baseUrl : 'http://localhost:9000',
     }),
     endpoints : (builder) => ({
+
         getVideos : builder.query({
             query : () => '/videos',
         }),
+
         getVideo : builder.query({
             query : (videoId) => `/videos/${videoId}`
         }),
+
         // /?title_like=css&title_like=javascript&_limit=2
         getRelatedVideo : builder.query({
             query : ({id, title}) => {
@@ -20,9 +23,17 @@ export const apiSlice = createApi({
                 const queryString = `/videos/?${titleLikes.join('&')}&_limit=4`;
                 return queryString ; 
             }
+        }),
+
+        addVideo : builder.mutation({
+            query : (data) => ({
+                url : '/videos',
+                method : 'POST',
+                body : data
+            })
         })
     }),
 })
 
 
-export const {useGetVideosQuery , useGetVideoQuery, useGetRelatedVideoQuery} = apiSlice;
+export const {useGetVideosQuery , useGetVideoQuery, useGetRelatedVideoQuery, useAddVideoMutation} = apiSlice;
