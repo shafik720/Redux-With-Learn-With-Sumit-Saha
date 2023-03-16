@@ -2,7 +2,9 @@
 import { useAddVideoMutation } from "../../features/api/apiSlice";
 import TextArea from "../ui/TextArea";
 import TextInput from "../ui/TextInput";
-import {useState} from "react"
+import {useState} from "react";
+import Success from '../../components/ui/Success';
+import Error from '../../components/ui/Error';
 
 export default function Form() {
     const [addVideo, { data:video, isLoading, isError, isSuccess}] = useAddVideoMutation();
@@ -18,7 +20,10 @@ export default function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault() ;
-        console.log(title, author, desc, link, thumbnail, date, duration, views)
+        // console.log(title, author, desc, link, thumbnail, date, duration, views);
+        addVideo({
+            title, author, desc, link, thumbnail, date, duration, views
+        })
      }
 
 
@@ -69,7 +74,9 @@ export default function Form() {
                     </button>
                 </div>
 
-                {/* <Success message="Video was added successfully" /> */}
+                {isSuccess && <Success message="Video was added successfully" />}
+                {isLoading && <h1>Loading...</h1> }
+                {isError && <Error message="There was an error adding the video"></Error> }
             </div>
         </form>
     );
