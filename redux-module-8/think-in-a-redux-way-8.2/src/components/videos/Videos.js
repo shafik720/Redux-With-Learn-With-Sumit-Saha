@@ -5,7 +5,7 @@ import Video from "./Video";
 
 export default function Videos() {
     const {data : videos, isLoading, isError} = useGetVideosQuery();
-    console.log(videos);
+    // console.log(videos);
 
     let content = null ;
     if(isLoading && !isError){

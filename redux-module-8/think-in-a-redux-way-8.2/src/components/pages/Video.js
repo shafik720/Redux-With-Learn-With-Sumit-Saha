@@ -26,6 +26,11 @@ export default function Video() {
             <Description video={video}/>
         </>
     }
+
+    let secondContent = null;
+    if (!isLoading && !isError && video.id){
+        secondContent = <RelatedVideos id={video?.id} title={video?.title} />;
+    }
     return (
         <section className="pt-6 pb-20 min-h-[calc(100vh_-_157px)]">
             <div className="mx-auto max-w-7xl px-2 pb-20 min-h-[400px]">
@@ -34,7 +39,7 @@ export default function Video() {
                         {content}
                     </div>
 
-                    <RelatedVideos />
+                    {secondContent}
                 </div>
             </div>
         </section>
