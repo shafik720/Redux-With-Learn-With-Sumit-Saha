@@ -1,39 +1,70 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deActiveEdit, newTransaction } from '../../../features/transactions/transactions';
+import { changeTransactions, deActiveEdit, newTransaction } from '../../../features/transactions/transactions';
 
 const CardBody = () => {
     const [title, setTitle] = useState('');
     const [type, setType] = useState('');
     const [amount, setAmount] = useState('');
+    const [isEdit, setIsEdit] = useState(false);
+
+    // --- getting state for editing transaction
+    const transactionState = useSelector(state => state.transaction);
+    const { error, isError, editing } = transactionState;
+    const { id, name, type: editType } = editing || {};
+    // console.log(transactionState.editing);
 
     const dispatch = useDispatch();
-    const handleCreateSubmit = (e) =>{
+    // -------------------------- adding new transactions
+    const handleCreateSubmit = (e) => {
         e.preventDefault();
-        dispatch(
-            newTransaction({
-            name : title,
-            type : type,
-            amount : Number(amount) 
-        }))
-    }
+        if (!isEdit) {
+            dispatch(
+                newTransaction({
+                    name: title,
+                    type: type,
+                    amount: Number(amount)
+                }));
+        } else if (isEdit) {
 
-    const handleCancelEdit = () => {
-        dispatch(deActiveEdit());
-    }
-    const transactionState = useSelector(state => state.transaction);
-    const {error, isError, editing} = transactionState;
-    const[isEdit, setIsEdit] = useState(false);
-    useEffect(()=>{
-        const {id, name, type} = editing || {};
-        console.log(name);
-        if(id){
-            setIsEdit(true);
-            setTitle(name);
-        }else{
+            dispatch(changeTransactions({
+                id : editing?.id,
+                data: {
+                    name : title,
+                    type,
+                    amount
+                }
+            }))
             setIsEdit(false);
         }
-    },[editing])
+        // resetForm();
+    }
+
+    const resetForm = () => {
+        setTitle('');
+        setType('');
+        setAmount('');
+    }
+    // --- Cancel Edit functionality
+    const handleCancelEdit = () => {
+        dispatch(deActiveEdit());
+        resetForm();
+    }
+
+    // --- passing all information to the form for editing transaction
+    useEffect(() => {
+        if (id) {
+            setIsEdit(true);
+            setTitle(name);
+            setType(editType);
+            setAmount(editing.amount)
+        } else {
+            setIsEdit(false);
+        }
+    }, [editing]);
+
+    // --- updating new edited transaction
+
 
     return (
         <div className="form">
@@ -47,6 +78,7 @@ const CardBody = () => {
                         name="title"
                         placeholder="Title"
                         required
+                        value={title}
                         onChange={e => setTitle(e.target.value)}
                     />
                 </div>
@@ -59,8 +91,8 @@ const CardBody = () => {
                             value="income"
                             name="type"
                             required
-                            checked = {type === 'income'}
-                            onChange = {() => setType('income')}
+                            checked={type === 'income'}
+                            onChange={() => setType('income')}
                         />
                         <label>Income</label>
                     </div>
@@ -70,8 +102,8 @@ const CardBody = () => {
                             value="expense"
                             name="type"
                             placeholder="Expense"
-                            checked = {type === 'expense'}
-                            onChange= {e => setType('expense')}
+                            checked={type === 'expense'}
+                            onChange={e => setType('expense')}
                         />
                         <label>Expense</label>
                     </div>
@@ -81,16 +113,16 @@ const CardBody = () => {
                     <label>Amount</label>
                     <input
                         type="number"
-                        placeholder="300"
                         name="amount"
                         required
-                        onChange = {e => setAmount(e.target.value)}
+                        value={amount}
+                        onChange={e => setAmount(e.target.value)}
                     />
                 </div>
                 {isEdit ? <button className="btn">Update Transaction</button> : <button className="btn">Add Transaction</button>}
-                
+
             </form>
-            
+
             {isError && <p>{error}</p>}
             {isEdit && <button className="btn cancel_edit" onClick={handleCancelEdit}>Cancel Edit</button>}
         </div>
