@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import apiSlice from '../features/api/apiSlice';
 import authSliceReducer from '../features/auth/authSlice';
 import messagesliceReducer from '../features/messages/messagesSlice';
@@ -12,5 +12,6 @@ export const store = configureStore({
     conversation : conversationSliceReducer
   },
   devTools : process.env.NODE_ENV !== 'production',
-  middleware : (getDefaultMiddleware) => getDefaultMiddleware.concat(apiSlice.middleware),
+  middleware : (getDefaultMiddlewares) => 
+  getDefaultMiddlewares().concat(apiSlice.middleware),
 });
