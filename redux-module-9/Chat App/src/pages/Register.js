@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
 
 export default function Register() {
+    const 
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
