@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { useAuthCheck } from "./hooks/useAuthCheck";
 import Conversation from "./pages/Conversation";
 import Inbox from "./pages/Inbox";
@@ -13,8 +14,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/inbox" element={<Conversation />} />
-                <Route path="/inbox/:id" element={<Inbox />} />
+                <Route path="/inbox" element={<PrivateRoute><Conversation /></PrivateRoute>} />
+                <Route path="/inbox/:id" element={<PrivateRoute><Inbox /></PrivateRoute>} />
             </Routes>
         </Router>
     );
