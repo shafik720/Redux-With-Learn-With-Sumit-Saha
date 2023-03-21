@@ -22,7 +22,6 @@ export default function Register() {
         }
         if(data?.accessToken){
             navigate('/inbox');
-            console.log(data);
         }
     },[data, responseError, isLoading])
 
