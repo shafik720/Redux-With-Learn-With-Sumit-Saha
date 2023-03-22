@@ -26,8 +26,6 @@ export default function ChatItems() {
     }
     if (!isLoading && !isError && conversation.length > 0) {
         // console.log(conversation);
-
-
         content = conversation.map(chat => {
             const { name, email: partnerEmail } = getParticipant(chat?.users, email);
 
