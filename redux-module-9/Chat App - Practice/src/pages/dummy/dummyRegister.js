@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
-import Error from "../components/ui/Error";
-import { useRegisterMutation } from "../features/auth/authApi";
 
 export default function Register() {
     const[name,setName] = useState('');
@@ -11,25 +9,9 @@ export default function Register() {
     const[repassword,setRepassword] = useState('');
     const[agreed, setAgreed] = useState(false);
 
-    const [register, {data, isLoading, isError, error} ] = useRegisterMutation();
-
     const handleSubmitt = (e) => {
         e.preventDefault();
-        // console.log(name, email, password, repassword);
-        register({
-            name, email, password,
-        })
-    }
-    const navigate = useNavigate();
-    let content = null ; 
-    if(isLoading && !isError){
-        content = <h1>Loading...</h1>
-    }
-    if(!isLoading && isError){
-        content = <Error message={error.error} />;
-    }
-    if(data?.accessToken){
-        navigate('/inbox');
+        console.log(name, email, password, repassword);
     }
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
@@ -155,7 +137,6 @@ export default function Register() {
                             </button>
                         </div>
                     </form>
-                    {content}
                 </div>
             </div>
         </div>
